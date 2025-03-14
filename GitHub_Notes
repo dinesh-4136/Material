@@ -1,0 +1,21 @@
+git config --global user.name "username" -> is used to config the user name 
+git config --global user.email "email" -> is used to config the email
+git config --global user.name -> is used to check the configured user
+git config --global user.email -> is used to check the configured email
+git init -> is used to initialise the git
+git clone -> is used to clone the repository from github to local system
+touch -> is used to add a new file
+vi file_name -> is used to insert data into the file
+git add . or git add file_name -> is used to move the changes from working directory to staging area
+git commit -m "commit message" -> is used to move the changes from staging area to commit stage
+git push origin branch_name -> is used to move the changes from commit stage to repository
+git status -> is used to see the changes are present in whish stage
+git log -> is used to see the commits history
+git log --author="user_name" -> to see the logs of a specific user
+git log file_name -> is used to see the logs of a specific file
+git log --max-count=number_of_days -> is used to see the logs for required days
+git restore --staged file_name -> is used to move the changes from staging area to working directory
+git reset --soft previous_commid_id -> is used to move the changes from commit stage to staaging area
+git rset --mixed previous_commit_id -> is used to move the changes from commit stage to working directory
+git reset --hard previous_commit_id -> is used to 
+git branch
