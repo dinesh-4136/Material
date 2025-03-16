@@ -30,3 +30,16 @@ git branch branch_name -> is used to create the new branch
 git checkout branch_name -> is used to shift from one branch to another branch
 git merge branch_name -> is used to merge the branch
 git branch -> is used to delete the branch
+git rebase branch_name -> is used to bring the linearty of the commits
+git commit --amend -> is used to replace the previous commit with new commit of your current branch
+git tag tag_name -> is used to create a tag, which can save the code as a zip or tar file
+git push origin tag_name -> is used to update the tag name
+git tag list -> is used to see the list of tags
+git tag --delete tag_name -> is used to delete the tag in local syatem
+git tag push origin tag_name -> is used to update the deleted tag in the github
+git stash -m "message" -> is used to store the temporary changes
+git stash applyt -> is used to bring back stash file
+git stash list -> to see the list of stash files
+git stash clear -> is used to delete the stash list
+git stash drop stash_index -> is used to delete the specific stash
+git stash pop -> is used to delete the stash and apply the stash
