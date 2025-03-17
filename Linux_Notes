@@ -74,11 +74,11 @@ What is an OS?
 ->which can control all the storage, input and output devices.
 -> every operation in the system can be done by the inbuilt prograns written in OS.
 -> which can manage:-Process management
-					-Memory management
-					-File system management
-					-Device management
-					-Security
-					-User Interface
+		    -Memory management
+		    -File system management
+		    -Device management
+		    -Security
+		    -User Interface
 -Popular OS
 	-Linux
 	-Windows
