@@ -1,0 +1,209 @@
+Day-12&13
+
+Git
+	GitHub is a source code management tool, It will store the developed code.
+	In SCM(source code management) we have two types, they are
+	1.DVCS: Distributed Version Control System
+		In this we can get the working copy of the code into our local system
+		Example for DVCS: GitHub
+	2.CVCS: Centralised Version Control System
+		In this we caannot get the working copy of the code into our local system, but we can do the changes directly by connecting to the server
+		Example for CVCS: SVN(subversion)
+	url of GitHub is: https://guthub.com/
+	In GitHub code is stored in Repositories
+	
+		open the gitbash	
+		first we need to cinfigure the user name
+		->syntex: git config --global user.name "user_name"
+		To configure the email for the user
+		->syntex: git config --global user.email "mail_id"
+		To check the configured name, we can user
+		->syntex: git config --global user.name
+		To check the configured email, we can user
+		->syntex: git config --global user.email
+		To install the git commands
+		->syntex: git init
+		To clone the repository from the github, ->click on the "Code" dropdown and copy the git url
+		then we can use the below command
+		->syntex: git clone git_url
+		->example: git clone https://github.com/user_name/repo.git
+		then the repo will downloaded into our local machine
+		then change the directory to downloaded repository and check the files present in that repository
+		->syntex: ls
+		touch newfile
+		git add .
+		git commit -m "commit message"
+		git push origin main
+		git status
+
+Day-14		
+	we have two types of repositories in github, they are
+	1.Public: In this anyone on the internet can see this repository and you choose who can commit to the Repositories
+		We can change the public repository to private repository
+		->open the settings in the repository and in the Danger Zone "change visibility" to "change to private"
+	2.Private: In this you choose who can see and commit to the repositories
+		We can change the private repository to public repository
+		->open the settings in the repository and in the Danger Zone "change visibility" to "change to public"
+	there are two ways to do changes in repository
+	1. We can do the changes directly in the GitHub
+		we can create a new file and add the code in it
+		we can upload the file from local sysytem to the repository
+	2. We can do the chnages from the local system
+			Working Directory -> Staging Area -> Commit Stage -> Repository
+		Clone the repo from github to local system(working directory) through gitbash
+		copy the git url from the code dropdown box
+		then open the gitbash and clone the repository
+		->syntex: git clone git_url
+		->example: git clone https://github.com/username/repo.git
+		To check the repository in the local system
+		-> syntex: ls
+		then change the directory to downloaded repository
+		->syntex: cd repository_name
+		This is the working directory, we can make the required changes to the code(changes not staged for commit)
+		In the working directory we have three concepts, they are
+		i.modified: updated the existing file
+		ii.deleted: deleted the existing file in github
+		iii.untracked: newly created file
+		->example: adding a file
+		->syntex: touch file2
+		after this we need to move to the Staging area(changes to be commited)
+		->syntex: git add filename
+		->example: git add . or git add file2
+		Then we move to the Commit stage
+		->syntex: git commit -m "commit_message"
+		->example: git commit -m "file2 added"
+		then we move to the Repository
+		->syntex: git push origin branch_name
+		->example: git push origin main
+		
+Day-15		
+		To check the commit history
+		->syntex: git log
+		To see the commits for specific time, we can use
+		->syntex: git log --since=number_of_days
+		->example: git log --since=3days
+		To see the last specific number of commit logs, we can use
+		->syntex: git log --max-count=number_of_commits
+		->example: git log --max-count=3
+		To see the commits for a specific file, we can use
+		->syntex: git log file_name
+		->git log file1
+		To see the commits of a specific user, we can use
+		->syntex: git log --author=user_name
+		->example: git log --author=user1
+		To check the logs for specific period fo time, we can use
+		->syntex: git log --since=starting_date(yyyy-mm-dd) --until=ending_date(yyyy-mm-dd)
+		->example: git log --since=2024-01-01 --until=2024-12-31
+		To see the logs from specific date to present date, we can use
+		->syntex: git log --since=starting_date(yyyy-mm-dd) --until=today
+		->example: git log --since=2024-01-01 --until=today
+		To check the status of the changes, we can use
+		->syntex: git status
+		To check the status of particular file, we can use
+		->syntex: git status file_name
+		->example: git status file1
+		To see the used commands, we can use 'history' command
+		->syntex: history
+		git fetch: It will fetch the changes from the GitHub but it will not disturb the working directory
+		->syntex: git fetch
+		git merge: It will merge the updated code in the guthub with the local sysytem 
+		->syntex: git merge
+		git pull: git fetch + git merge
+		It will pull the changes from the GitHub and saves the changes in local system or Working Directory
+		To update the changes made in the github to local system, we can use
+		->syntex: git pull
+		
+Day-16
+	Restore: this command is used to restore the file from staging area to working directory
+	->syntex: git restore --staged file_name
+	->example: git restore --staged file1
+	Reset: this command is used in commit stage, the Reset stage will delete from the logs
+	we have three types in this
+	i.soft: the changes will come from 'commit stage' to 'staging area'
+	->syntex: git reset --soft previous_commit_id
+	->example: git reset --soft a2626e2932
+	ii.mixed: the changes will come from'commit stage' to 'working directory'
+	->syntex: git reset --mixed previous_commit_id
+	->example: git reset --mixed 35a00e72de2a
+	iii.hard: is used to remove the later commits
+	->syntex: git reset --hard previous_commit_id
+	->example: git reset --hard b2d7bd921e0dc
+	
+Day-17
+	Branch:
+	To see the branch list, we use
+	->syntex: git branch
+	To create new branch, we use
+	->syntex: git branch branch_name
+	->example : git branch feature1
+	To change the branch in git bash, we can use
+	->syntex: git checkout branch_name
+	->example: git checkout branch-1
+	To merge the branch, we can use
+	->git merge branch_name
+	->example: git merge feature1
+	To push the changes into github, we can use
+	->syntex: git push origin branch_name
+	To delete the branch, we can use
+	->syntes: git branch -d branch_name
+	->example: git braanch -d branch-1
+	->syntex: git push origin --delete branch_name
+	->example: git push origin --delete branch-1
+	
+Day-18
+	Tags: To store the particular release code in zip(like versions)
+	To create a tag, when we create tag then it will create a zip(tar.gzip or zip) file upto the particular code(version)
+	->syntex: git tag tag_name
+	->example: git tag v1.1.1
+	Then we need to push the tag,
+	->syntex: git push origin tag_name
+	->example: git push origin --tags (to push all the tags at a time)
+	->example: git push origin v1.1.1
+	To see the list of tags,
+	->syntex: git tag --list
+	To delete the tag in local system
+	->syntex: git tag --delete tag_name
+	->example: git tag --delete v2.2.2
+	To delete the tag in github
+	->syntex: git push origin tag_name
+	->example: git push origin --delete v1.1.1
+	
+	Amend: When you amend a commit, you replace the previous commit with a new commit to your current branch
+	->syntex: git commit --amend
+	->example: git commit --amend
+	
+	Rebase: It is used to bring the linearty of the commits, brings the commits from feature branch to main branch
+	->syntex: git rebase branch_name
+	->example: git rebase branch-1
+	
+Day-19:
+	Stash
+	Collaborator
+	PAT
+	
+	Stach: Git stash is used to store the temporary changes
+			Git stash will not work for the untrackced files, It will work for existing files only
+	->syntex: git stash -m "message"
+	->example: git stash -m "stash-0"
+	To see the stash files, we use
+	->syntex: git stash list
+	To bring back the stash file, we use
+	->syntex: git stash apply
+	To delete the stash list, we use
+	->syntex: git stash clear
+	To delete the particular stash, we use
+	->syntex: git stash drop stash_index
+	->example: git stash dropo stash@{0}
+	To delete the stash and apply the stash, we use
+	->syntex: git stash pop
+	
+	Collaborator: The Collaborator who can access the others repo, with the Collaborator access
+		we can give the contributer access to the other github user for our repository
+		->settings->Collaborator->add people->add to repository
+		>then contributer user need to accept the collaborator request
+		>after adding, when the user made any changes to the repo, then only the user becomes as the contributer
+		
+	PAT: Personal Access Token
+	we can use the PAT to authenticate github from the server, to made code changes in repository
+	->Profile->settings->Develper_setting->Personal_access_tokens->Tokens(classic)->generate_new_token->generate_new_token(classic)->Token_name->set_expiery->select_scopes->Generate_Token
+	->Copy the generated token, It won't be able to see it again
