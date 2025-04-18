@@ -1,0 +1,587 @@
+Day-1
+SDLC - Software Development Life Cycle
+-Requirement
+--Plan and Design
+---Implementing
+----Testing
+-----Deploy
+------Maintenance
+SDLC is of two types, they are
+1. Waterfall Model
+2. Agile Model
+
+1. Waterfall Model:
+Waterfall model is linear model, in this model one phase will work and remaining phases need to wait until completion of the above phase.
+- Requirement
+-- Planning & Designing
+--- Development
+---- Testing
+----- Deployment
+------ Maintenance
+
+2. Agile Model
+Agile model is flexible model, in this all phases work together and in this model work can be divided into sprints
+Sprint1: -> Planning -> Designing -> Development -> Testing -> Deployment -> Maintenance ->
+Sprint2: -> Planning -> Designing -> Development -> Testing -> Deployment -> Maintenance ->
+Sprint3: -> Planning -> Designing -> Development -> Testing -> Deployment -> Maintenance ->
+
+Day-2
+DevOps: Automating the de;ivery of the Application
+ Development + Operations = DevOps
+ Continuous Integration
+ Continuous Delivery
+ Continuous Deployment
+- Deployment
+- Configuration 
+- Logs
+- Auto Scaling
+ - Horizontal Scaling
+ - Vertical Scaling
+
+DevOps Life Cycle
+->Plan: Software delivery to Client
+-->Code: SCM(Source Code Management) tool, which is used to store the code
+	-CVCS(Centralized Version Control System): Subversion  : we cannot make the working copy of code into the local system
+	-DVCS(Distributed Version Control System): GitHub  : we can make the working copy of code into the local system
+--->Build:
+	-Build Tools:-Java: Maven, Ant, Gradle
+		     -Python: Pip
+		     -Nodejs: Npm
+		     -Dart: Flutter
+		     -dotnet: Msbuild
+---->Test: UT(Unit Testing), IT(Integration Testing), PT(Performance Testing), CT(Compatability Testing)
+	-SAST(Static Application Security Testing): SonarQube
+	-DAST(Dynamic Application Security Testing: OWASP
+----->Release: All the devops stages are integrated here
+	-Release tool: Jenkins, Gitops
+------>Deploy: we can deploy the application in to Server, like: AWS, Azure, GCP,... through: EKS, EBS, Docker
+------->Operate: IAC(Infrastructure As Code): Terraform or Cinfiguration tools: Ansible
+-------->Monitor: continuously monitor the application working status with tools like: Prometheus, Grafana, Datadog, Splunk...
+
+DevSecOps
+ DevOps + Security
+
+Day-3
+Linux Installation 
+-> open the "Turn Windows feature on or off" from start menu
+--> then check the option "Windows Subsystem for Linux" then click ok
+---> then Restart the system
+----> then open the POwershell as Administrator and run the below command
+	: wsl --install -d ubuntu
+	-> then create a user and provide the password
+	
+What is an OS?
+->which can control all the storage, input and output devices.
+-> every operation in the system can be done by the inbuilt prograns written in OS.
+-> which can manage:-Process management
+					-Memory management
+					-File system management
+					-Device management
+					-Security
+					-User Interface
+-Popular OS
+	-Linux
+	-Windows
+	-Mac
+	-Android
+	-iOS
+	-Unix
+	-Chrome OS
+	
+In DevOps mostly used OS is Linux.
+-Why we use Linux?
+	-It is light weight operating system(less storage)
+	-It is opensource
+	-more secure
+	-performance is fast compared other OS
+	-we can perform multiple tasks at a time
+-Types of OS is Linux
+	-RPM(Redhat Package Management): Centos, Fedora, Suse, Amazon  Linux, Redhat and Package management tools are: Yum, dnf
+	-Debiam: Ubuntu, Debian, Kali Linux and Package management tools are: apt or apt-get
+
+Day-4	
+Linux Directory Structure
+-bin: All Linux commands work because of bin directory
+-dev: Storage
+-home: when you install a Linux OS, by default we have two users
+	1. one is 'root user': who has the full access like read, write and execute
+	2. another one is 'normal user': who has limited access
+	-> Root user can add number of noraml users by using the commmand "adduser username" or "useradd username"
+	-> when we create an user, a default directory with user name will create to that user in home directory
+-mnt(mount): Storage
+-tmp: the directory where everyone has full access
+-var: varying: which can contain the log files which are varying frequently
+-boot: which contains the booting process program files
+	BIOS(Basic Input Output System), MBR(Master Boot Record), GRUB, Kernel, Init, Runlevel Programs
+-etc: which will save the configuration files
+	if we create users, then that configuration files will be saved in the 'etc' directory, we can find them by using the command "cat /etc/shadow
+-media: which can used to store the audio and video data
+-opt: third party applications(jenkins master slave)
+-root: home directory for root user is "/root"
+	for normal user they have own directory with the user name in the "home" directory
+
+Day-5	
+Linux Commands
+	-File management commands
+	-File permission commands
+	-User management commands
+	-Process management commands
+	-Storage management commands
+	-Network management commands
+	-Package management commands
+-File Management Commands:
+	In Linux we can create different types of empty files using the "touch" command
+	->syntex: touch filename.filetype
+	->example: touch file1.txt
+	In Linux we can create different type files at a time
+	-> exapmle: touch file1.txt file2.ppt file3.doc file4.abc
+	In Linux we can delete the file using "rm" command
+	->syntex: rm filename
+	->example: rm file1.txt
+	for deleting all files at a time we use the below command
+	->synetx: rm *
+	for deleting files which are started with same file name, we can use below command
+	->syntex: rm file starting name*
+	->example: rm file* (for removing files starting with name file)
+	for deleting files which are ending with same file name, we can use below command
+	->syntex: rm *file ending name
+	->example: rm *file (for removing files ending with name file)
+	for deleting files which contain same file name in the middle, we can use below command
+	->syntex: rm *file common name*
+	->example: rm *file* (for removing files contain same name file in middle)
+	for deleting all files/directories forcefully we use the below command
+	->synetx: rm -rf filename/directoryname
+	->example: rm -rf file1/dir1
+	To check the current working directory, we can use the below command
+	->syntex: pwd
+	In Linux we can create the directory by using the below command
+	->syntex: mkdir directoryname
+	->exapmle: mkdir dir1
+	To see the created files or directories, we can use the below command
+	->syntex: ls
+	To see the created files or directories with details, we can use the below command
+	->syntex: ls -l
+	for directories we have 'd' in the starting place of file details and for file we have '-' in the starting place of file details
+	In Linux we can create multiple directories at a time by using the below command
+	->syntex: mkdir directoryname directoryname directoryname
+	->example: mkdir dir1 dir2 dir3
+	To find the OS information, we can use below command
+	->syntex: cat /etc/os-release
+	"." means cureent directory
+	To create a directory and sub directory in that, we can use the below command
+	->syntex: mkdir -p directoryname/directoryname/directoryname (hear p means parent)
+	->example: mkdir -p dir1/dir2/dir3
+	->syntex: mkdir -pv directoryname/directoryname/directoryname (hear pv means parent verbos)
+	->example: mkdir -pv dir1/dir2/dir3
+	To see the detaails of specific directory, we use 'ls -ld' command
+	->syntex: ls -ld directory_name
+	->example: ls -ld dir1
+	We cannot delete the directories/files which contains data with rm/rmdir commands, for deleting non-empty files/directories we can use "rm -rf" command
+	->syntex: rm -rf * (which can delete all files and directories)
+	->syntex rm -rf filenames/directorynames
+	->example: rm -rf file1/dir1 file2/dir2
+	To see the above created directories, we can use "tree" command
+	-> syntex: tree .
+	To install the "tree"command, use the below command
+	->syntex: snap install tree
+	To see the data in a file we can use "cat"command
+	->syntex: cat filename
+	->example: cat file1
+	To see the data in a file in reverse order we can use "tac" command
+	->syntex: tac filename
+	->example: tac file1
+	To copy the data from multiple files to newfile
+	->syntex: cat filename filename >newfilename
+	->example" cat file1 file2 >file3
+	To check the last used commands, we can use "history" command
+	->syntex: history
+	To use the command from the history of the commands, we use "!" command
+	->syntex: !command number
+	->example: !23 (using the 23rd command from the history)
+	
+	Document editors in Linux are:
+	->vi editor
+	->nano editor
+	vi editor: It is used to insert the data into files
+	To open the file, we can use 'vi filename' command
+	->syntex: vi filename
+	->example: vi file1
+	It will open the file, then for inserting the data we use the command 'i' or 'insert'
+	-> syntex: i or insert
+	for replacing the entered data, again use the 'i' or 'insert' command, then we can enter our required data where we need to replace
+	after entering the data into the file, for exit from the insert mode we use 'esc' button
+	For deleting a line, we can use the 'esc+dd' command
+	->syntex: esc+dd
+	To delete number of lines, we can use 'number of lines+dd'
+	->syntex: number of lines+dd
+	->example: 2+dd (for deleting 2 lines)
+	For retriving the deleted data, we can use 'esc+u' command
+	->syntex: esc+u
+	To move the curser to first line from anywhere, we can use 'esc+gg'command
+	->syntes: esc+gg
+	To move the curser to last line from anywhere, we can use 'shift+g'command
+	->syntex: shift+g
+	To set the numbering to the data, we can use 'set nu or set number' command
+	->syntex: :set nu or :set number
+	To remove the numbering to the data, we can use 'set nonu' command
+	->syntex: :set nonu
+	To save the file, we can use ':w' command
+	->syntex: :w
+	To save and quit from the file, we can use ':wq!' command
+	->syntex: :wq!
+	To exit from the file without saving the data, we can use ':q!' command
+	->syntex: :q!
+	To see the data in the file, we can use 'cat' command
+	->syntex: cat filename
+	->example: cat file1
+	To see the data from the file in reverse order, we can use 'tac' command
+	->syntex: tac filename
+	->example: tac file2
+	
+Day-6
+	Copy
+	Move
+	Grep
+	Copy: which can duplicate the exisitng file, In Linux we have three types of file copying
+	1.File to File copying: in this we can create a new file and copy the data from the existing file
+	->syntex: cp source_filename target_filename
+	->example: cp file1 file2
+	To copy the data from multiple files to newfile
+	->syntex: cat filename filename >newfilename
+	->example" cat file1 file2 >file3
+	2.File to Directory: In this we can create a new file in required directory with data in the exisiting file
+	->syntex: cp source_filename target_directory_name
+	->example: cp file1 dir1
+	To copy thr multiple files at a time which are strted with same filename
+	->syntex: cp startingfilename* target_directoryname
+	->example: cp file* dir1
+	To copy a file to a sub directory
+	->syntex: cp filename target_directory_path
+	->example: cp file1 d1/d2/d3/d4
+	3.Directory to Directory: In this we have three cases
+	i.copying entire directory
+	->syntex: cp -r source_directory_name target_directory_name
+	->example: cp -r dir1 dir2
+	ii.copying only data in the directory
+	->syntex: cp -r source_directory_name/* target_directory_name
+	->example: cp -r dir1/* dir2
+	iii.coping specific file in the directory
+	->syntex: cp -r source_directory_name/filename target_directory_name
+	->example: cp -r dir1/file1 dir2
+	for copying specific files from one direct to another directory
+	->syntex: cp -r source_directory_name/{filename,filename,filename} target_directory_name
+	->example: cp -r dir1/{file1,file2,file3} dir2
+	Head
+	Tail
+	Head: This command is used to print 10 lines of the file from top
+	->syntex: head filename
+	->example: head file1
+	To print specific lines from the top
+	->syntex: head -number_of_lines_to_print filename
+	->example: head -3 file1
+	Tail: This command is used to print 10 lines of the file from bottom
+	->syntex: tail filename
+	->example: tail file1
+	To print specific lines from the bottom
+	->syntex: tail -number_of_lines_to_print filename
+	->example: tail -3 file1
+	To print specific  line in the file
+	->syntex: head -limit_number filename | tail -number_of_lines_to_print
+	->example: head -3 file1 | tail -1
+	->example: head -7 file1 | tail -3
+	
+Day-7
+	Grep: which is used to search specific text patterns in the file
+	To print the data conatins the text with case that we requested
+	->syntex: grep "text_to_be_search" filename
+	->example: grep "surya" file3
+	To print the exact data we requested with case, to show the data that matches the pattern
+	->syntex: grep -o ""text_to_be_search" filename
+	->example: grep -o "surya" file3
+	To print the exact text with ignoring case that we requested
+	->syntex: grep -i "text_to_be_search" filename
+	->example: grep -i "surya" file3
+	To print the exact text with case and line number that we requested
+	->syntex: grep -n "text_to_be_search" filename
+	->example: grep -n "surya" file3
+	To print the exact text with ignoring case and line number that we requested
+	->syntex: grep -in "text_to_be_search" filename
+	->example: grep -in "surya" file3
+	To show all the lines excluding the matching pattern
+	->syntex: grep -v "text_to_be_search" filename
+	->example: grep -v "surya" file3
+	To remove the specific data from the file and saving that data into a new file
+	->syntex: grep -v "text_to_be_search" filename>newfilename
+	->example: grep -v "surya" file3>file4
+	To find the number of lines of data present in a file
+	->syntex: wc -l filename
+	->example: wc -l file3
+	To find the number of charecters of data present in a file
+	->syntex: wc -c filename
+	->example: wc -c file3
+	To find the number of words of data present in a file
+	->syntex: wc -w filename
+	->example: wc -w file3
+	
+	Sed:It is used to print and delete data from the file, in this we two components
+	n for printing
+	i for deleting, substituting
+	To print n number of lines from a file
+	->syntex: sed -n 'starting_position,ending_position+p' filename
+	->example: sed -n '1,5p' file1
+	To print data from specific line to specific line
+	->syntex: sed -n 'starting_position,ending_position+p' filename
+	->example: sed -n '3,9p' file1
+	To print the last line of the file
+	->syntex: sed -n '$p' filename
+	->example: sed -n '$p' file2
+	To print the first line of the file
+	->syntex: sed -n '1p' filename
+	->example: sed -n '1p' file3
+	To delete n number of lines from the file from starting
+	->syntex: sed -i 'starting_position,ending_position+d' filename
+	->example: sed -i '1,5d' file4
+	To delete the last line from the file
+	->syntex: sed -i '$d' filename
+	->example: sed -i '$d' file4
+	To delete specific line from the file
+	->syntex: sed -i 'required_line_number_to_delete+d' filename
+	->example: sed -i '5d' file4
+	To substitute or replace data in a file
+	->syntex: sed -i 's/word_to_find,word_to_replace/g' filename
+	->example: sed -i 's/srinu/virat/g' file3
+	
+Day-8
+	Compression(zip)(tar plus gzip) and Extraction(unzip)
+	zip: This command is used to compress size of the file
+	We have three types in zipping,
+	files
+	->syntex: zip myfiles.zip filename
+	->example: zip myfiles.zip file1
+	file plus directory(empty)
+	->syntex: zip myfiles.zip filename directory_name
+	->example: zip myfiles.zip file1 dir1
+	files plus directory(non-empty)
+	->syntex: zip -r myfile.zip filename directory_name
+	->example: zip -r myfile.zip file1 dir1
+	unzip: This command is used to extract the files in zip file
+	->syntex: unzip zip_file_name
+	->example: unzip myfile.zip
+	
+Day-9
+	User Management
+	While installing Linux OS, we have two users one is Root user and second is Normal user
+	Root user: who has full access like: read, write and execute
+	Normal user: who has limited access, sometimes normal user can take the root user priviliges using 'sudo' command
+	->example: Root user can install the application using: apt install git,
+			   while normal user can install the applicaation using: sudo apt install git, when he is in sudo group.
+	We can find the user list in the shadow file which is present in the /etc directory
+	->syntex: cat /etc/shadow
+	To check an user is exist or not, we have two commands
+	->syntex: id username or cat /etc/shadow | grep "username"
+	->example: id user1 or cat /etc/shadow | grep "user1"
+	For adding user we have two methods, they are: 'useradd' and 'adduser'
+	1.useradd: with this method we cannot set the password to the user, 
+	->syntex: useradd username
+	->example: useradd user1
+	After creating user we need to set password seperatly by using 'passwd' command
+	->syntex: passwd username
+	->example: passwd user1
+	2.adduser: in this method we can set password while creating the user
+	->syntex: adduser username
+	->example: adduser user1
+	While creating a noraml user with adduser, then a directory will be created in the /home directory with the same user name
+	To see the details of specific directory, we use 'ls -ld' command
+	->syntex: ls -ld directory_name
+	->example: ls -ld dir1
+	When you create a file/directory they conatins two types of owners, they are
+	1.userowner
+	2.groupowner
+	When you check an user, using 'id' command we will get below details
+	->syntex: id username
+	->example: id user1
+	we will get: uid=1003(user1) gid=1003(user1) groups=1003(user1),100(users),1002(grp1)
+	in this uid=1003(user1) is the user id of the user
+	gid=1003(user1) is the primary or default group of user
+	groups=1003(user1) is the secondary group of user
+	One user can have only one primery group and he can be added to multiple secondary groups
+	We can create the group using the 'groupadd' command
+	->syntex: groupadd group_name
+	->example: groupadd group1
+	we can see the created groups in gshadow file which is in the /etc directory
+	->syntex: cat /etc/gshadow
+	We can add an user to the group, using 'usermod -aG' or 'gpasswd -a' command
+	->syntex: usermod -aG group_name user_name or gpasswd -a user_name group_name
+	->example: usermod -aG grp1 usr1 or gpasswd -a usr1 grp1
+	To change primery group of the user, we can use 'usermod -g'
+	->syntex: usermod -g group_name user_name
+	->example: usermod -g grp1 usr1
+	To delete the user from the group, we can use
+	->syntex: gpasswd -d user_name group_name
+	->example: gpasswd -d user1 group1
+	To delete the user we use 'userdel' command, but hear we cannot delete the directory of the user
+	->syntex: userdel username
+	->example: userdel user1
+	To delete the user and user directory, we use 'userdel -r' command
+	->syntex: userdel -r username
+	->example: userdel -r user1
+	To delete the group, we use 'groupdel' command
+	->syntex: groupdel group_name
+	->example: groupdel grp1
+	To set expiry for the user password, we use 'chage' command
+	->syntex: chage -M number_of_days user_name
+	->example: chage -M 30 user1
+	To set warning for the user password, we use 'chage' command
+	->syntex: chage -W number_of_days user_name
+	->example: chage -W 30 user1
+	To view password information of a user, we use 'chage' command
+	->syntex: sudo chage --list user_name
+	->example: sudo chage --list user1
+	
+Day-10
+	tar and gzip
+	tar: it means tape archive(compress), 'tar' is more advanced then 'zip' command
+	->syntex: tar -cvf tar_file_name.tar file_name directory_name
+	->example: tar -cvf myfile.tar file1 dir1
+	cvf: compress verbose file
+	gzip: It can compress files only
+	->syntex: gzip tar_file_name
+	->example: gzip myfile.tar
+	To extract the tar.gz file, we can use 'tar -xvf' command
+	->syntex: tar -xvf gz_file_name
+	->example: tar -xvf mytar.tar.gz
+	xvf: extract verbose file
+	
+	chmod
+	chown
+	To switch from user to another user, we can use 'su' command
+	->syntex: su user_name
+	->example: su user1
+	If a normal user want access the sudo command, he need to be added in the sudo group
+	->syntex: usermod -aG sudo user_name
+	->example: usermod -aG sudo user1
+	chown: we have three typess changing owners, they are
+	1.changing user owner: To change the user owner, we can use
+	->syntex: sudo chown user_name file_name
+	->example: sudo chown root file5
+	2.changing group owner: To change the group owner, we can use
+	->syntex: sudo chown :user_name file_name
+	->example: sudo chown :root file5
+	3.changing both user owner and group owner: To change both user owner and group owner, we can use
+	->syntex: sudo chown user_name:user_name file_name
+	->example: sudo chown root:root file5
+	To change the owners for empty directory, we use
+	->syntex: chown user_name:user_name directory_name
+	->example: chown user1:user1 dir3
+	To change the owners for non-empty directory, we use
+	->syntex: chown -R user_name:user_name directory_name
+	->example: chown -R user1:user1 dir3
+	
+Day-11
+	chmod: we have three types of permissions, they are
+	for file: -rwxr-xr-x
+	for directory: drwxr-xr-x
+	in this:       rwx        |        r-x        |        r-x
+	         user permissions | group permissions | others permissions
+	-: file
+	d: directory
+	r: read:4
+	w: write:2
+	x: execute:1
+	u: user
+	g: group
+	o: others
+	a: all
+	To provide read permissions for the user
+	->syntex: chmod u+r file_name/directory_name
+	->example: chmod u+r file1/dir1
+	To remove write permissions for the group
+	->syntex: chmod g-w file_name/directory_name
+	->example: chmod g-w file1/dir1
+	To provide permissions for all, we can use
+	->syntex: chmod a+rwx file_name/directory_name
+	->example: chmod a+rwx file1
+	To remove permissions for all, we can use
+	->syntex: chmod a-rwx file_name/directory_name
+	->example: chmod a-rwx file1
+	To remove write access and provide read access to all, we can use
+	->syntex: chmod a-w,a+r file_name/directory_name
+	->example: chmod a-w,a+r file1/dir1
+	To provide permissions for all, we can use
+	->syntex: chmod 777 file_name/directory_name
+	->example: chmod 777 file1
+	To remove permissions for all, we can use
+	->syntex: chmod 000 file_name/directory_name
+	->example: chmod 000 file1
+	
+	Storage commands
+	To see the total storage data, we can use
+	->syntex: df -h
+	To see the storage of a specific directory,we can use
+	->syntex: du -h file_name/directory_name
+	->rxample: du -h file1/dir1
+	To see all the running processes, we can use
+	->syntex: top or htop
+	in this status of the process is R:running, S:sleeeping
+	To stop a running process, we can use kill command
+	->suntex: kill -9 process_ID
+	->example: kill -9 287
+	-9: forcefully stop
+	
+Day-12
+	Network Management commands
+	ping: To check the connectivity between the two servers and to check internet connection
+	->syntex: ping domain_url
+	->example: ping www.google.com
+	To install the network tools, we can use
+	->syntex: apt install net-tools -y
+	ifconfig: this command is used to check the ip address
+	->syntex: ifconfig
+	in this, eth:ethernet
+	ip addr show: this command is used to check the ip address
+	->syntex: ip addr show
+	dig: will explain in DNS
+	traceroute: This command is used for debugging purpose
+	->syntex: traceroute domain_url
+	->example: traceroute www.google.com
+	curl: To display the frontend page of a domain
+	wget: to get the url of the zip file
+	->syntex: wget zipfile_url
+	
+	systemctl: To start, stop and restart (check) the status of the service
+	To start the service, we can use
+	->syntex: systemctl status service_name
+	->example: systemctl status jenkins
+	To stop the running service
+	->syntex: sudo systemctl stop service_name
+	->example: sudo systemctl stop jenkins
+	To start the service, we can use
+	->syntex: sudo systemctl restart service_name
+	->example: sudo systemctl restart jenkins
+	
+	servcie: To start, stop and restart the status of the service
+	To start the service, we can use
+	->syntex: sudo service service_name start
+	->example: sudo service jenkins start
+	To stop the service, we can use
+	->syntex: sudo service service_name stop
+	->example: sudo service jenkins stop
+	To restart the service, we can use
+	->syntex: sudo service service_name restart
+	->example: sudo service jenkins restart
+	
+	More
+	less
+	More: It is used to show the data in page mode
+	->syntex: more file_name
+	->example: more file3
+	Less:
+	->syntex: less file_name
+	->example: less file3
+	
+	Find: which i used to find the required file
+	->syntex: find . -type f/d -name file_name/directory_name
+	->example: find . -type f/d -name file1/dir1
+	Locate: which i used to locate the required file
+	->syntex: locate . -type f/d -name file_name/directory_name
+	->example: locate . -type f/d -name file1/dir1
