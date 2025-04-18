@@ -1,0 +1,335 @@
+Jenkins
+Day-23&24:
+	Stages in DevOps(automation of repetitive tasks):
+	-> Plan -> Code -> Build -> Test -> Release -> Deploy -> Operate -> Monitor
+	In Pipeline(Release stage) the DevOps stages Code,Build,Test,Release and Deploy will integrate with CI/CD Tools(Jobs)
+	In Pipeline we have three main types, they are
+	i. Freestyle
+	ii. Pipeline
+	iii. Multibranch
+	CI/CD: Continuos Integration and Continuos Delivery/Deployment
+	Example for CI/CD tools are Jenkins(it is open source tool), Gitops, travisCI, bamboocity,...
+	Continuos Integration: which contains the Plan, Code, Deploy and Test stages.
+						   Which is the Developer portion
+	Continuos Delivery: which will done in Nonprod regions
+	Continuos Deployment: which will done in Production region
+	In real time we have three regions, they are
+	i.Dev region
+	ii.Testing region: In this we have UAT(User Acceptance Testing) and SIT(System Integration Testing)
+	iii.Production region
+	*Developer will develop the code and send the code to UAT region.
+	 in UAT region, testings will be done and send to SIT region.
+	 in SIT region, testings will be done and send to Pre-Production region.
+	 in Pre-Production region, continuos delivery(which is the heigher version of release code) will be done and send to Production region.
+	 in production region continuos deployment(which is current running version (live) version) will be done.
+	 
+	 Rollback: when the new version of code will not work, then releases the previous version.
+	 
+	 Job: In the job we can integrate all the stages(code,build,test,deploy,release) in devops life cycle
+		  Which will automate the software delivery using build triggers
+		  
+	Jenkins Installation in AWS Server:
+	-First create an instance in AWS
+	-then search for jenkins.io in browser -> then click the download option -> and select the OS type -> then copy the required code and paste in shell(jenkins.sh) script
+	* to run the jenkins it requires JDK(Java Development Kit) or JRE(Java Runtime Engine)
+	* for running number of commands at a time, place those commands in a shell script and save with .sh extension
+	* sleep command is used to stop the server for given time
+	
+#!/bin/bash
+sudo apt update
+sudo apt install fontconfig openjdk-17-jre
+sleep 2	
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+/etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sleep 2
+sudo apt-get install jenkins
+
+	then run the shell script: sh jenkins.sh
+	To check the jenkins version: jenkins --version
+	To check the status of the jenkins: sudo systemctl status jenkins
+	*Master jenkins server
+	The default directory of Jenkins is: /var/lib/jenkins
+	Installed plugins will store in: /var/lib/jenkins/plugins
+	To install plugins in Jenkins: 
+	-> Dashboard -> Manage Jenkins -> plugins -> available plugins -> search for the required plugin and install
+	To see the newly created users: /var/lib/jenkins/users
+	To create a user:
+	-> Dashboard -> Manage Jenkins -> Users -> Create User -> Provide the details and create
+	To see the jobs: /var/lib/jenkins/jobs
+
+Day-25:
+	-previous class learned about:
+	Jenkins
+	Jenkins Installation
+	-Today we learn about:
+	Jobs in Jenkins
+	Automation using build triggers
+	-DevOps: automates the software delivery using CI/CD tools like Jenkins with build triggers
+	Build Triggers: In Jenkins, build triggers are mechanisms that automatically start the execution of a pipeline or job based on certain events or conditions. 
+	These triggers help automate the build process and eliminate the need for manual intervention to start builds.
+	-In a Jenkins pipeline, there are different ways to trigger a build. Below are some of the most common triggers used in Jenkins pipelines:
+	1. Poll SCM (pollSCM)
+	: This trigger polls the source code management (SCM) system (e.g., Git, SVN) for changes and triggers a build if changes are detected.
+	2. GitHub Webhook (GitHub trigger)
+	: With a GitHub webhook, Jenkins can be configured to listen for specific events (e.g., push, pull request) and trigger builds automatically.
+	3. Build After Other Projects are Built (Build Trigger)
+	: This trigger allows you to set up a build dependency, where the pipeline triggers after another project/job finishes building successfully.
+	4. Timer Trigger (cron)
+	: A timer trigger uses cron-like syntax to schedule builds at specific times or intervals (e.g., run every day at midnight).
+	5. Build on SCM Change (SCM Trigger)
+	: This trigger is similar to pollSCM, but more focused on detecting changes and triggering based on them.
+	6. Manual Trigger (Input Step)
+	: In some cases, you may want to have the build pipeline paused and require manual intervention before proceeding. This can be done using the input step.
+	7. Parameterized Trigger
+	: You can trigger a build based on parameters, allowing you to pass specific parameters to the build. This is often used to trigger a downstream job with specific inputs.
+	8. Custom Triggers (Using Jenkinsfile hooks)
+	: You can also write custom triggers or actions using hooks. This allows you to execute a script or some other command to trigger the pipeline.
+
+		-> Build periodically: In Jenkins, setting up a build periodically trigger is a way to automatically trigger a build on a regular schedule. 
+		This is done using cron syntax in the Jenkins pipeline configuration.
+		If you want to run a Jenkins pipeline periodically (for example, every day at midnight or every hour), you can use the cron trigger within the triggers block of your pipeline.
+		-create a pipeline with name: build periodically
+		-then in the configuration section we have the triggers option, in that select the "build periodically" option
+		*it is used with cron expression:      *            *              *               *              *
+		                                 minutes(0-59)|hours(0-23)|day of month(1-31)|month(1-12)|day of the week(0-6)
+		*Example: * * * * * : Every minute
+				: 0 * * * * : Every hour
+				: 0 0 * * * : Every day at 12:00 AM
+				: 0 0 * * FRI : At 12:00 AM, only on Friday
+				: 0 0 1 * * : At 12:00 AM, on the day 1 of the month
+		-provide the time period accoridng to requirement
+		-then save and apply the job
+		-now the pipeline can run automatically, at your requested time
+		
+		-> Upstream and Downstream jobs: In Jenkins, upstream and downstream jobs are terms used to describe the relationship between different jobs or pipelines, 
+		especially when one job triggers another. This is a fundamental concept in Jenkins’ continuous integration and delivery (CI/CD) systems, 
+		allowing you to chain jobs together based on their execution order.
+		-now we have to configure two pipelines, in that second pipeline need to run automatically after the completion of first pipeline
+		-create a pipeine with name: upstream job and configure with hello world program
+		-then create another job with name: downstream job
+		-then in the configuration section we have the triggers option, in that select the "Build after other projects are build" option
+		-then provide the job name, that should complete before this job and select the required trigger option
+		-then configure the pipeline script with a sample hello world program
+		-then save and apply the job
+		-now, this pipeine is ready to run after the completion of the first job
+		
+		-> pollSCM: 
+		-> Webhook:
+		
+Day-26&27:
+	-previous class learned about:
+	Build Triggers
+	Build Periodically
+	Upstream and downstream job
+	-Today we learn about:
+	pollSCM
+	waebhook
+	Master slave or master agent
+	
+	-> pollSCM: pollSCM is a feature that allows you to trigger a build when changes are detected in your source code repository 
+	(typically a Git repository or similar source control management system). It's often used in Jenkins pipelines to automatically 
+	build and test your code when new commits are pushed to the repository.
+	-create a pipeine with name pollSCM
+	-and configure with the hello world program in the pipeline script
+	-then open "configuration" and select "pipeline syntex" in the "pipeline" tab
+	-and select the checkout option in sample steps
+	-then provide the required details
+		github url: 
+		credentials:
+		branch:
+	-then click on "Generate Pipelilne Script" option
+	-now copy and paste that script in the pipeline script
+	-then in the configuration section we have the triggers option, in that select the "pollSCM" and provide the cron timing period to check the code changes
+	-then save and apply the job
+	-then pipeline will run only when there are changes in the github code in scheduled time intervel
+	
+	-> Webhook: In Jenkins, a webhook is a way to trigger a Jenkins job (or pipeline) automatically when an event happens in an external system, 
+	such as a commit pushed to a GitHub repository, a merge request, or other events. Webhooks are commonly used to integrate Jenkins with 
+	version control systems (VCS) like GitHub, GitLab, Bitbucket, etc.
+	When a webhook is triggered, Jenkins automatically starts a job without needing manual intervention.
+	-create a pipeine with name Webhook
+	-then in the configuration section we have the triggers option, in that select the "GitHub hook trigger for GITScm polling" option
+	-and configure with the hello world program in the pipeline script
+	-then open "configuration" and select "pipeline syntex" in the "pipeline" tab
+	-and select the checkout option in sample steps
+	-then provide the required details
+		github url: 
+		credentials:
+		branch:
+	-then click on "Generate Pipelilne Script" option
+	-now copy and paste that script in the pipeline script
+	-then copy the jenkins ip address with port number
+	-then open the github repository and open settings option and slect the webhooks option
+	-then click on "Add Webhook" and provide the password for webhook creation
+	-now paste the copied jenkins url with github-webhook/ in the "Payload URL"
+	-and select the "application/json" option in content type
+	-and select the "Send me everything" option in Which events would you like to trigger this webhook?
+	-and click on Add webhook
+	-now the pipeline is set to run with webhook, when the changes are done in the github code
+	
+	->Jenkins Master Slave Configuration: In Jenkins, a master-slave (agent) configuration allows you to distribute the build workload 
+	across multiple machines, where the master is the central Jenkins server that manages the overall Jenkins environment and the slaves 
+	(or agents) are additional machines that execute jobs on behalf of the master.
+	This configuration is useful when you have resource-intensive jobs, need to scale Jenkins, or want to run builds on different environments (e.g., different OS or configurations).
+	-The machine(server) in which you have installed the Jenkins is called as the Jenkins Master machine
+	-sometimes we wont run the jobs in master machine for safety reasons, at that time the jobs will run in agent(slave) machines
+	-when multiple teams works on master machine then the load will increase on that machine and server will get down, for that each team will work with seperate agent machine
+	-Reasons for configurong Agents:
+		i.Build distribution
+		ii.Security
+		iii.To maintain master machine always up and run
+	-Agent configuration
+	-Create a server and install Jenkins in it, then it will becomes the master machine
+	-then install the jdk in master machine: sudo apt update && apt install openjdk-17-jre -y
+	-then create another server for the slave machine
+	-then install the jdk in slave machine: sudo apt update && apt install openjdk-17-jre -y
+	-then change user to root user
+	-then change the directory to /opt and make a directory with name Jenkins_server in it: cd /opt and mkdir jenkins_server (: mkdir -p /opt/jenkins_server)
+	-then change the user owner and group owner to non-root user: chown -R ubuntu:ubuntu jenkins_server
+	-now open the jenkins installed in the master machine and goto the "Manage Jenkins" and click on "Nodes" and click on "New Node"
+	-give the name for the node as "myagentmachine" and type as "Permanent Agent" and click on "create"
+	-then provide the required details for the Node
+		Description: for build distribution
+		Remote root directory: /opt/Jenkins_slave/
+		Labels: slave "slave1" "slave2" "slave3"
+		Usase: Use this node as much as possible
+		Lauch method: Launch agents via SSH
+		Host: agent machine ip adddress
+		Credentials: Add credentials:
+			Domain: Global credentials
+			Kind: SSH user name with private key
+			scope: Global
+			ID: ubuntu
+			Description: agent user name and pemfile
+			Username: ubuntu
+			Private key: enter directly
+				key: copy and paste the pemfile of the keypair using for the agent machine and click on add
+			then select the added credentials
+		Host Key Verifying  Strategy: Non veryfying Verification strategy
+		Availability: Keep this agent as much as poosible
+		and click on "Save"
+	-then open the agent from Nodes and click on launch agent
+	-afetr agent is in online
+	-create a job and configure with sample Hello world program
+	-in that update the agent to created agent with label
+		agent {
+			label "slave1"
+			}
+	-then save and apply the job
+	-then the job will run in the Agent(slave) machine
+	
+Day-28:
+	Deploying the Java project in Docker with Jenkins Pipeline
+	-First create the server
+	-then install the openjdk-17-jre, maven
+	-and also install and run the Jenkins and Docker
+	-configure the port numbers 22, 8080 and 8081 in security group for the server
+	-now open the Jenkins with public ip and port number(8080)
+	-then login and configure jenkins
+		plugins: install required plugins, like: Docker, Eclips
+		tools: configure the  required tools, like: jdk, docker
+	-creat a new pipeline and configre with sample hello world project
+		like:pipeline {
+				agent any
+					stages {
+						stage('Hello') {
+							steps {
+								echo 'Hello World'
+							}
+						}
+					}
+				}
+	-update the script with required tools
+		like:pipeline {
+				agent any
+					tools {
+						jdk 'jdk-11'
+					}
+				}
+	-then open "configuration" and select "pipeline syntex" in the "pipeline" tab
+	-and select the checkout option in sample steps
+	-then provide the required details
+		github url: 
+		credentials:
+		branch:
+	-then click on "Generate Pipelilne Script" option
+	-now copy and paste that script in the pipeline script
+		like:pipeline {
+				agent any
+					tools {
+						jdk 'jdk-17'
+					}
+				
+				stages {
+					stage('Git-Checkout') {
+						steps {
+							checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'my-github', url: 'https://github.com/dinesh-4136/JavaWebCalculator.git']])
+						}
+					}
+				}
+			}
+	-then save and run the pipeline, then checkout stage will run
+	-then upate the pipeline script to produce the artifact
+		like:pipeline {
+				agent any
+					tools {
+						jdk 'jdk-17'
+					}
+				
+				stages {
+					stage('Git-Checkout') {
+						steps {
+							checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'my-github', url: 'https://github.com/dinesh-4136/JavaWebCalculator.git']])
+						}
+					}
+					stage('Package') {
+						steps {
+							sh 'mvn package'
+						}
+					}
+				}
+			}
+	-then update the script to build the docker image
+		like:pipeline {
+				agent any
+					tools {
+						jdk 'jdk-17'
+					}
+				
+				stages {
+					stage('Git-Checkout') {
+						steps {
+							checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'my-github', url: 'https://github.com/dinesh-4136/JavaWebCalculator.git']])
+						}
+					}
+					stage('Package') {
+						steps {
+							sh 'mvn package'
+						}
+					}
+					stage('Build and Run Docker Image') {
+						steps {
+							sh 'docker build -t myapp1:v1 .'
+							sh 'docker run --name myapp1 -d -p 8081:8080 myapp1:v1'
+						}
+					}
+				}
+			}
+	
+	-then check weather the application is running or not
+		open the browser and run public ip address with port number(8081) and application name: 0.000.000.00:8081/webapp-0.1
+
+*Jenkins Job:
+	1.Prebuild: The build tools will install the required dependencies mentioned in the pom.xml, package.json
+	2.Build: In this code will compile and package the code to artifacat, and run the unit and integration testings mentioned in the pom.xml file
+	3.Postbuild: In this deploy in Docker or Kubernetes and send the notification about the deployment
+			
+	* Jenkins pipeline configuration options:
+	-Discard old Builds: In Jenkins, it's often necessary to manage the number of builds retained by a job or pipeline. 
+	As Jenkins builds up a history of jobs, it can consume significant storage space. To prevent Jenkins from keeping too many old builds, 
+	you can configure the build retention policy to discard old builds after a certain number of builds or days.
+	
