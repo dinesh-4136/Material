@@ -1,0 +1,63 @@
+Azure Cloud
+- Azure Services
+  - Compute:
+    - Azure VM's
+      Where we can spin up virtual machines in different OS. 
+    - AKS (Azure Kubernetes Service)
+      It is used to manage your container workload.
+    - Azure Functions
+      It is functions as a service.
+      used schedule even driven tasks.
+    - Azure App Services
+      This is purely platform as a service.
+      we can directly deploy our code/application in Azure App Service.
+    - Azure Batch
+      It is used to run the parallel batch execution jobs for data processing.
+
+  - Storage:
+    - Azure Blob Storage
+      we can store semi-structured or unstructured data in this.
+    - Azure Datalake Storage
+      store data for data analytics needs.
+      It is also used for staging area like to store all your raw data.
+    - Azure Files
+      this is file share service.
+      fully managed serverless file shares.
+
+  - Database:
+    - Azure Cosmos DB
+      Globally distributed NoSQL database.
+    - Azure SQL DB
+      it is for relational workloads.
+      fully managed relational database service.
+    - Azure DB for Postgres.
+
+  - Networking:
+    - Azure CDN (Azure Content Delivery Network)
+      It is for provide services at geographical locations across the globe.
+    - Azure VNet (Azure Virtual Network)
+      we segregate and create groups of resources within the private network.
+    - Azure Express Route
+      It is the bridge for connecting cloud and on-prime infrastructure.
+
+  - Management:
+    - Azure AD (Azure Active Directory)
+      It is also known as Microsoft Entra ID.
+      very comprehensive service which provides your identity and access management.
+    - Azure DevOps
+      It is a suit of services, which can integrate all the Azure services.
+    - Azure Monitor
+      Modern Observability tool.
+      Is used to monitor different resource across the Azure cloud.
+
+  - Analytics:
+    - Azure Synapse Analytics
+      which is providing all kind of data warehousing services.
+    - Azure Data Factory
+      It is a ETL tool, used to create ETL pipelines, Data pipeline.
+
+  - ML (Machine Learning):
+    - Azure ML
+      which provides all kinds of machine learning services.
+    - Azure Cognitive Services
+      

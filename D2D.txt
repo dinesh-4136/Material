@@ -1,0 +1,64 @@
+29/04/2025
+replica count is set to 0 for all services?
+
+In manual deployment where we have to deploy the pods via manual edits based on UAT2 builds
+
+excel api config is not required for higher env, because it's new service
+
+says to dev-poc when you receive questions, acknowledge them
+
+
+primary difference is 
+there excel.redis and redis
+ip address
+
+tomorrow task is to involve in the release
+for that, we required
+-authorization
+-provide access
+
+30/04/2025
+
+participated in due diligence with Hyder and Gerald
+attended for "New hire benefits presentation" meeting
+Installed SSMS 20.and configured with Hyder Kroll email 
+Installed DBeaver 25.0.0 
+Installed Visual Studio Code
+Installed Visual Studio
+raised OnePoint ticket for Visual studio
+gone through the KDS-PCM Wiki
+taking training tasks
+
+
+01/05/2025
+
+gone through the KDS-PCM Wiki
+taking training tasks
+
+parametrized uat
+remove the nodeselector and replace it with ${nodeselector}
+update in the Kubernetes.yaml file
+then add it(env: kdspcm) in the library for uat
+then add it(agentpool: kdspcm) in the library for prod
+
+need to shadow the refresh of pre-dev env
+
+copy all the repos
+checkout master
+find Kubernetes.yaml
+find the nodeselector under deployment
+find the library make the changes
+pipelines all coreapi
+coreapi release- in uat and prod 
+
+! [rejected] master -> master (TF402455: Pushes to this branch are not permitted; you must use a pull request to update this branch.)
+
+uat, prod and prod-dr too
+
+02/05/2025
+
+started training tasks
+
+az aks create --name myAKSCluster --resource-group myResourceGroup --node-count 1 --node-vm-size Standard_DS1_v2 --location eastus2
+
+az aks create --resource-group myResourceGroup --name myAKSCluster --node-count 1 --node-vm-size Standard_B2ms --enable-managed-identity --generate-ssh-keys

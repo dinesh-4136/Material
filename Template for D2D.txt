@@ -1,0 +1,97 @@
+Template
+
+Date -
+
+Feedback
+
+* No. of meetings:
+
+* Meeting details:
+
+* Tasks:
+
+Closed all the tabs
+
+LOGGED OUT
+
+
+Date - 30-04-2025
+
+Feedback
+
+* No. of meetings: 2 meetings
+
+* Meeting details:
+
+1. due diligence for UAT with Hyder and Gerald
+
+2. New hire benefits presentation
+ 
+* Tasks:
+
+- Installed SSMS and configured with DB,
+
+- and installed DBeaver, Visual Studio Code and Visual Studio
+
+- raised OnePoint ticket for Visual studio
+- gone through the KDS-PCM Wiki
+
+- taking training tasks
+ 
+Closed all the tabs
+
+LOGGED OUT
+
+Date - 01-05-2025
+
+Feedback
+
+* No. of meetings: 1
+
+* Meeting details:
+due diligence for UAT and Prod with Hyder and Gerald
+
+* Tasks:
+- updated Kubernetes.yml file with 'nodeselector' and raised PR's for the following services
+1.pcm-core-api
+2.pcm-importexport-api
+3.pcm-marketdata-api
+4.pcm-pdffin-api
+5.pcm-private-proxy
+
+- added Library value 'nodeselector' for UAT, PROD and PROD-DR for following services
+1.pcm-core-api
+2.pcm-importexport-api
+3.pcm-marketdata-api
+4.pcm-pdffin-api
+5.pcm-private-prox
+
+- gone through the KDS-PCM Wiki
+- OnePoint ticket got resolved and got the access for Visual Studio
+- checked the required software's installation and configuration
+- completed some training tasks
+ 
+Closed all the tabs
+
+LOGGED OUT
+
+Date - 02-05-2025
+
+Feedback
+
+* No. of meetings:
+
+* Meeting details:
+
+* Tasks:
+- completed training tasks
+
+Closed all the tabs
+
+LOGGED OUT
+
+
+
+az aks create --name myAKSCluster --resource-group myResourceGroup --node-count 1 --node-vm-size Standard_DS1_v2 --location eastus2
+
+az aks create --resource-group myResourceGroup --name myAKSCluster --node-count 1 --node-vm-size Standard_B2ms --enable-managed-identity --generate-ssh-keys
