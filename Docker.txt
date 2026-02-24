@@ -1,0 +1,376 @@
+
+Day-1
+	Docker: Docker is a containerization tool.
+	-containerization means application will running inside the container.
+	-container will form using an image
+	-Docker Image means application packaged inside the image
+	-when you run the image it will create the container
+	-container will contain the application
+	
+	Difference between Virtualization and Containerisation
+	-Isolation
+	-Resource Usage
+	-Performance
+	-Portability
+	-Deployment Speed
+	-Ecosystem
+	-Use Cases
+	
+	Applications
+	i.monolithic
+	ii.microservice
+	
+	Docker Architecutre:
+	-docker host, where we can instsall the docker engine is called it as 
+	-docker commands will run in the docker client(docker CLI)
+	-docker registery or docker hub, where we can find the official docker images
+	-we can develop our own or custom images and we can store it in docker hub
+	-docker image, where the image packaged inside the image
+	-when you runs the image then container will be created
+	-application will be created in the container
+	
+	Installing DOcker Engine in the AWS server
+	-First create an instance with the name Docker
+	-then search for "docker install in ubuntu" in the browser and open the first link
+	-then select the required OS and then copy the script for docker setup and docker installation
+	-now create a file in server with the name docker.sh and paste the copied script in that
+	-then run the docker.sh file to install the docker engine
+	-when you install the docker in server then that server will become docker host
+	-when you install the docker it will install the docker client also, where we can run the docker commands
+	-After that check whether the docker is installed or not, by using the below commands
+		: docker –version
+		: sudo systemctl status docker
+	-when you install docker only root user can get all the permissions, but non-root user didn't have the access.
+	-to check whether the group is created or not, use below commands
+		: sudo cat /etc/gshadow | grep docker
+	-for providing access to non-root users, we need add the non-root users to the docker group
+		: sudo usermod -aG docker non-root_user
+	-docker group, which is created by default when we installed the docker.
+	-to check whether the user added to group or not, we use below commands
+		: id user_name
+	-then need to update the permissions for the non-root user, run the below commands
+		: newgrp docker
+	-then check the permissions are granted or not, run the below commands
+		: docker images
+	-the data related to docker will store in the below directory
+		: /var/lib/docker
+	-if we want to pull an image, we can make request from the docker client, then it will ask the deamon for the image,
+	then deamon will check in the image is present in /var/lib/docker/images, if it's present in that the it will show the image,
+	if it's not present in that path, then deamon will request the docker registry or hub for that image, then docker registry 
+	will respond to for the pull request and it will provide the requested image, then it will store in the /var/lib/docker/images
+	-we can pull the image by using below command,
+		: docker pull image_name
+		: docker pull jenkins/jenkins
+	-to check wheather the image is pulled or not, run below command
+		: docker images
+	-after image is pulled, then we can run the image it will create the conatiner, by using below command
+		: docker run --name container_name -d -p 8080:8080 image_name:tag_name
+		: docker run --name jenkins -d -p 8080:8080 jenkins/jenkins:2.414.3-jdk17
+	-to check the container is running or not, with below command
+		: docker ps
+	-to check the all containers (running and not running), we can use below command
+		: docker ps -a
+	-now, we can access the application with server public ip address and port number assigned for the container
+		: public_ip_address:port_number
+		: 3.110.167.211:8080
+
+Day-2:		
+	-to pull an image, we can use
+		: docker pull image_name:tag_name
+		: docker pull nginx
+	-to list the images, we can use
+		: docker images
+	-to remove the pulled images, we can use
+		: docker rmi image_name
+		: docker rmi nginx
+	*if we didn't provide tag_name, then it will automaically choose the latest version
+	-to remove all the imges at a time, we can use
+		: docker rmi -f $(docker images -q)
+	-to see the images with only Image_id, we can use
+		: docker images -q
+	-to run a container from the image, we can use
+		: docker run --name container_name -d -p host_port_number:actual_port_number image_name:tag_name
+		: docker run --namr jenkins -d -p 8080:8080 jenkins/jenkins:2.414.3-jdk17
+	-to see the running containers, we can use
+		: docker ps
+	-to see the all containers (running or not running), we can use
+		: docker ps -a
+	-to delete a container, first we need to stop the container by using below command
+		: docker stop <container_name_or_id>
+		: docker stop jenkins
+	-now, to delete the container, we can use
+		: docker rm <container_name_or_id>
+		: docker rm jenkins
+	-to start a stopped container,we can use
+		: docker start <container_name_or_id>
+		: docker start jenkins
+	-to delete a running container without stopping the container,we can use
+		: docker rm -f <container_name_or_id>
+		: docker rm -f jenkins
+	-to delete all stoppped containers, we can use
+		: docker container prune
+	-to remove all the containers (running or not running) at a time, we can use
+		: docker rm -f $(docker ps -aq)
+	-to run the not pulled image as container, we can use
+		: docker run --name container_name -d -p host_port_number:actual_port_number image_name:tag_name
+		: docker run --namr jenkins -d -p 8080:8080 jenkins/jenkins:2.414.3-jdk17
+	-to enter into the container, we can use
+		: docker exec -it conatiner_name /bin/bash
+		-exec: execute
+		-it: interactive mode
+		: docker exec -it jenkins /bin/bash
+	-now we are in the container, we can find the password by using below command
+		: cd /var/jenkins_home/secrets/initialAdminPassword
+	*we can run same application with different versions in docker, it is not possible in normal servers
+	-to delete the volume of conatiner, we can use
+		: docker volume prune
+		
+Day-3
+	-Docker Volumes: volumes are a way to persist and share data between containers and between a container and the host system.
+
+	-Docker Networks: networks are used to allow containers to communicate with each other and with the outside world. 
+	By default, Docker creates a bridge network for containers, but Docker also allows you to create custom networks to control how containers communicate.
+	-first create an instance in AWS with name Docker
+	-then install the docker
+	-check whether docker is running or not, by using below command
+		: service docker status (or) systemctl status docker
+	-after installation add user to the docker group, by using below command
+		: sudo usermod -aG docker user_name
+		: sudo usermod -aG docker ubuntu
+	-then run the below command to aquire the access
+		: newgrp docker
+	-for checking the user added to group or not, by using below command
+		: id user_name
+	Types of networks in Docker:
+		1. Bridge Network
+		2. Host Network
+		3. None Network
+	-to see the list of networks, use below command,
+		: docker network ls
+	-the default network in docker is Bridge network, If we run any container it will run on bridge network only.
+	-lets run a container as below,
+		: docker run --name container_name -d -p port_number:actual_port_number image:version/tag
+		: docker run --name jenkins -d -p 8082:8080 jenkins/jenkins:jdk17
+	-to check that on which network the container is running, we can use below command
+		: docker inspect container_name
+		: docker inspect jenkins
+	-now run the another container as below,
+		: docker run --name sonar -d -p 9000:9000 sonarqube:lts
+	-to check the connectivity between two servers we can use the ping command, 
+	first we need to login to one container and then run the ping command with the ip address of the second container
+	-login to the container as a root user,
+		: docker exec -it --user root jenkins /bin/bash
+	-then run the below command,
+		: apt update -y
+	-then install the ping command as below,
+		: apt install iputils-ping -y
+	-then run the ping command to check the connectivity
+		: ping ip_address
+		: ping 172.17.0.3
+	-to clean up the unnecessary files in volumes, we can use
+		: docker volume prune
+	-to run a network in specific network, for this we are not supposed to use the port numbers, we can use
+		: docker run --name jenkins -d --network host jenkins/jenkins:jdk17
+	now how can we disconnect from one network and connect to another network
+	-we cannot connect to host network and disconnect from host network
+	-we cannot create a host or none netwrok
+	-we can disconnect from bridge network and connect to none network and viceversa
+	-to disconnect from a network, we can use below command
+		: docker network disconnect network_name container_name
+	-to connect to a network, we can use the below command
+		: docker network connect network_name container_name
+	-we can create our own bridge network, but we cannot create host or none networks
+		: docker network create --driver=bridge mybridgenetwork
+	-then we can run container in created network as below
+		: docker run --name conatiner_name -d -p port_number:actual_port_number --network network_name image_name:tag_name
+		: docekr run --name jenkins -d -p 8080:8080 --network mynetwork jenkins/jenkins:jdk17
+		
+Day-4
+	-we can create the subnet also
+		subnet is of two types, they are
+		1. IPV4 : 32 bits
+		2. IPV6 : 64 bits
+		
+	subnet: IPV4/CIDR: 192.168.0.0/16
+	-how many ip's can created with above CIDR value
+		: 2power32-16 = 2power16 = 65536 (192.168.0.0 to 192.168.255.255)
+	-what is the use of ip
+		ip is used to identify the server
+	-to create a network with subnet, we can use below command
+		: docker netwrok create --driver=bridge --subnet=192.168.0.0/16 192_network
+	-to check the network is created or not
+		: docker network ls
+	-by default we can run the images to create the container, we can use the below command
+		: docker run --name jenkins -d -p 8080:8080 jenkins/jenkins:jdk17
+	then docker will automatically assign the ip address
+	-we can find the ip address using the below commands
+		: docker inspect container_name
+	-now we can run the conatiner in created network with the subnet, we can used
+		: docker run --name jenkins -d -p 8080:8080 --network 192_network jenkins/jenkins:jdk17
+	to check the container is created or not, we can use
+		: docker ps
+	to check the network and ip address of the container, we can use
+		: docker inspect container_name
+	-to delete the network, first we need to delete the containers running on that network
+	-for deleting the container, we can use below command
+		: docker rm -f container_name
+		: docker rm -f jenkins
+	-to delete the network,we can use the below command
+		: docker network rm network_name
+		: docker network rm 192_network
+	-to delete the unused networks, we can use below command
+		: docker network prune
+	-to check all the things happening in the docker, we can use
+		: docker system info
+	
+	Docker Volumes: volumes are a way to persist and share data between containers and between a container and the host system.
+		 we have three types volumes, they are
+		 1. Named volumes
+		 2. Anonymous volumes
+		 3. Bind volumes
+		the default path for the volumes in docker is : /var/lib/docker/volumes/
+	1.Anonymous Volumes
+		which is created by itself: when you run a container an anonymous volume will be created automatically
+	-to check the available volumes, we can use below command
+		: docker volume ls
+	-to delete the unused volumes, we can use below command
+		: docker volume prune
+	
+	2. Named Volumes
+		Named volume can be created by user with providing a name
+		we can use the volume name to assign for a creating container
+	-to create a named volume, we can use
+		: docker volume create myvol
+	-to run a container in the created volume, we can use below command
+		: docker run --name container_name -d -p port_number:a image_name:tag_name
+		: docker run --name sonar -d -p 9000:9000 sonarqube:lts
+	-to delete the created named volume, we can use below command
+		: docker volume rm volume_name
+		: docker volume rm myvol
+	
+	3. Bind Volumes
+		-we can use the bind volumes to keep the data persistent, to prevent the data loss
+		-we can store the data using bind volumes, even if container was deleted
+		-to create the bind volumes, we need to know thw default directory of the service
+		-the default directpry for Sonarqube is
+			: /opt/sonarqube/data
+		--and port number for sonarqube is: 9000
+		-the default directpry for SQL database is
+			: /var/lib/mysql
+		-and port number for SQL database is: 3306
+		-the default(where everything stores) directory for jenkins in container is
+			: /var/jenkins_home
+		-and port number for jenkins is: 8080
+		-for creating bind volumes,
+			change to root user
+				: sudo -i
+			then change the directory to /opt directory
+				: cd /opt
+			then create directory there
+				: mkdir jenkins-volume
+			then change the owner for the directory as non-root user
+				: chown ubuntu:ubuntu jenkins-volume
+			then exit from the root user to ubuntu user
+				: exit
+			to run the container with bind volume, we can use below command
+				: docker run --name jenkins -d -p 8080:8080 -v /opt/jenkins-volume:/var/jenkins_home jenkins/jenkins:jdk17
+			then check the data present in bind volume, as below
+				: cd /opt/jenkins-volume
+				: ls
+			if we create any file in this it will sink with the default directory of jenkins container
+				: mkdir hostfile
+			this file will reflect in default directory of jenkins container also
+			then again run the jenkins server and create pipelines in that
+			then delete the jenkins container
+			now again create the jenkins container with the bind volume, then the old data will be restored in the new container
+		
+		-to run the mysql database, we can use
+			: docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+			
+Day-5
+	Derivatives in Docker file
+	
+	-What is a Dockerfile?
+		A Dockerfile is a simple text file with a set of instructions that tells Docker how to build an image.
+	-Why do we use a Dockerfile?
+		Here’s why it’s super useful:
+		1. Automation & Reproducibility
+		Instead of manually setting up an environment, you just write it once in a Dockerfile.
+		Anyone else can use that same file to build the exact same image.
+		2. Consistency
+		Keeps your app running the same way across development, staging, and production.
+		No more “it works on my machine” issues.
+		3. Version Control
+		You can version your Dockerfile with Git, so you can track changes to your build environment just like your code.
+		4. Customization
+		You decide which base image to use, what packages to install, how your app runs, etc.
+		5. Lightweight Deployment
+		Docker images are portable, so you can deploy your app anywhere Docker runs.
+	
+	-by building the dokcer file,  we get the docker image
+	-bu using the image we can rua the application in a container
+	
+	1.FROM:
+		Mention the base image with the tag which you are using
+		-for java application we use tomcat9 image
+		-in the base image all the dependencies are pre installed
+		-we can use base images from docker hub
+		-in docker hub we have the official images
+		-the base image for jenkins is jenkins/jenkins:jdk17, hear jenkins/jenkins is the image name and jdk17 is the tag name
+		
+	2. ENV
+		Is used to set the variables in the container
+		
+	3. WORKDIR
+		Inside the container, where we can perform operations
+		with WORKDIR, we can switch to required directory in container
+			: WORKDIR /var/jenkins_home
+		
+	4. RUN
+		it is used to run the linux commands in the container
+			: RUN touch file1
+			: RUN apt install git -y
+			
+	5. COPY
+		is used to copy the files from docker host to the container
+			: COPY file1.txt /var/jenkins_home
+			
+		and we can use WORKDIR also for copying files to the container
+			: WORKDIR /var/jenkins_home
+			:COPY file1.txt . (hear . means /var/jenkins_home(current directory))
+		In the docker host in the current directory switch to target directory, in that you have the .war file, 
+		copy that file to /usr/local/tomcat/webapps inside the container
+			: COPY target/*.war /usr/local/tomcat/webapps
+		
+	6. ADD
+		with COPY command we cannot extract the files, but with ADD commandd we can extract the compressed files
+		ADD command will copy the compressed file and unzip the file
+			: ADD mtfile1.zip  /usr/src/app
+			
+	7. USER
+		It is used to switch between the users in a conatiner
+		if we hhave to install an application with root user then need to switch to the non-root user, wee can use below command
+			: FROM ubuntu:20
+			  USER root
+			  RUN apt install git -y
+			  USER ubuntu
+			  
+	8. LABEL
+		is used to add the comments, like user_name, date, ..
+		now it was deprecated, it is used in earlier days, now it was not using
+		
+	9. EXPOSE
+		It is used to mentioning the port numbers
+		for tomcat we can use the port number: 8080
+		for nodejs we can use the port number: 3000
+		for ngnix we can use the port number: 80
+			: EXPOSE 8080
+		
+	10. CMD and ENTRYPOINT
+		we can is this to start the application
+		for starting the nodejs application, we can use npm start
+			: CMD ["npm", "start"]
+		for starting the python application, we can use npm start
+			: CMD ["python3", "app.py"]
+			hear 'npm' is the command and 'start' is the argument
+			
